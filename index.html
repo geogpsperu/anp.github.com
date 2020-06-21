@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css">
+        <link rel="stylesheet" href="css/qgis2web.css"><link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <style>
+        #map {
+            width: 415px;
+            height: 559px;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/qgis2web_expressions.js"></script>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/leaflet.pattern.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/rbush.min.js"></script>
+        <script src="js/labelgun.min.js"></script>
+        <script src="js/labels.js"></script>
+        <script src="data/Departamentos_1.js"></script>
+        <script src="data/ZonasReservadas_2.js"></script>
+        <script src="data/Zonadeamortiguamiento_3.js"></script>
+        <script src="data/AreadeConservacionPrivada_4.js"></script>
+        <script src="data/AreadeConservacionRegional_5.js"></script>
+        <script src="data/AreasNaturalesProtegidasDefinitivas_6.js"></script>
+        <script>
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[-18.80873578040692,-82.11874522214025],[0.4192020751906895,-67.86176437050325]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a> &middot; <a href="https://qgis.org">QGIS</a>');
+        var autolinker = new Autolinker({truncate: {length: 30, location: 'smart'}});
+        var bounds_group = new L.featureGroup([]);
+        function setBounds() {
+        }
+        map.createPane('pane_GoogleMaps_0');
+        map.getPane('pane_GoogleMaps_0').style.zIndex = 400;
+        var layer_GoogleMaps_0 = L.tileLayer('https://mt1.google.com/vt/lyrs=r&x={x}&y={y}&z={z}', {
+            pane: 'pane_GoogleMaps_0',
+            opacity: 1.0,
+            attribution: '',
+            minZoom: 1,
+            maxZoom: 28,
+            minNativeZoom: 0,
+            maxNativeZoom: 18
+        });
+        layer_GoogleMaps_0;
+        map.addLayer(layer_GoogleMaps_0);
+        function pop_Departamentos_1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">NOMBDEP</th>\
+                        <td>' + (feature.properties['NOMBDEP'] !== null ? autolinker.link(feature.properties['NOMBDEP'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Departamentos_1_0() {
+            return {
+                pane: 'pane_Departamentos_1',
+                opacity: 1,
+                color: 'rgba(35,35,35,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(133,182,111,0.0)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Departamentos_1');
+        map.getPane('pane_Departamentos_1').style.zIndex = 401;
+        map.getPane('pane_Departamentos_1').style['mix-blend-mode'] = 'normal';
+        var layer_Departamentos_1 = new L.geoJson(json_Departamentos_1, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Departamentos_1',
+            layerName: 'layer_Departamentos_1',
+            pane: 'pane_Departamentos_1',
+            onEachFeature: pop_Departamentos_1,
+            style: style_Departamentos_1_0,
+        });
+        bounds_group.addLayer(layer_Departamentos_1);
+        map.addLayer(layer_Departamentos_1);
+        function pop_ZonasReservadas_2(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">anp_codi</th>\
+                        <td>' + (feature.properties['anp_codi'] !== null ? autolinker.link(feature.properties['anp_codi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_nomb</th>\
+                        <td>' + (feature.properties['anp_nomb'] !== null ? autolinker.link(feature.properties['anp_nomb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_sect</th>\
+                        <td>' + (feature.properties['anp_sect'] !== null ? autolinker.link(feature.properties['anp_sect'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_ubpo</th>\
+                        <td>' + (feature.properties['anp_ubpo'] !== null ? autolinker.link(feature.properties['anp_ubpo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_suleg</th>\
+                        <td>' + (feature.properties['anp_suleg'] !== null ? autolinker.link(feature.properties['anp_suleg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_balec</th>\
+                        <td>' + (feature.properties['anp_balec'] !== null ? autolinker.link(feature.properties['anp_balec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_felec</th>\
+                        <td>' + (feature.properties['anp_felec'] !== null ? autolinker.link(feature.properties['anp_felec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_ZonasReservadas_2_0() {
+            return {
+                pane: 'pane_ZonasReservadas_2',
+                opacity: 1,
+                color: 'rgba(168,0,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(245,122,122,0.6)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_ZonasReservadas_2');
+        map.getPane('pane_ZonasReservadas_2').style.zIndex = 402;
+        map.getPane('pane_ZonasReservadas_2').style['mix-blend-mode'] = 'normal';
+        var layer_ZonasReservadas_2 = new L.geoJson(json_ZonasReservadas_2, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_ZonasReservadas_2',
+            layerName: 'layer_ZonasReservadas_2',
+            pane: 'pane_ZonasReservadas_2',
+            onEachFeature: pop_ZonasReservadas_2,
+            style: style_ZonasReservadas_2_0,
+        });
+        bounds_group.addLayer(layer_ZonasReservadas_2);
+        function pop_Zonadeamortiguamiento_3(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">objectid</th>\
+                        <td>' + (feature.properties['objectid'] !== null ? autolinker.link(feature.properties['objectid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_codi</th>\
+                        <td>' + (feature.properties['anp_codi'] !== null ? autolinker.link(feature.properties['anp_codi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_nomb</th>\
+                        <td>' + (feature.properties['anp_nomb'] !== null ? autolinker.link(feature.properties['anp_nomb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">za_super</th>\
+                        <td>' + (feature.properties['za_super'] !== null ? autolinker.link(feature.properties['za_super'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">za_pvpm</th>\
+                        <td>' + (feature.properties['za_pvpm'] !== null ? autolinker.link(feature.properties['za_pvpm'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">za_balea</th>\
+                        <td>' + (feature.properties['za_balea'] !== null ? autolinker.link(feature.properties['za_balea'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">za_felea</th>\
+                        <td>' + (feature.properties['za_felea'] !== null ? autolinker.link(feature.properties['za_felea'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">za_balem</th>\
+                        <td>' + (feature.properties['za_balem'] !== null ? autolinker.link(feature.properties['za_balem'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">za_feler</th>\
+                        <td>' + (feature.properties['za_feler'] !== null ? autolinker.link(feature.properties['za_feler'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">za_obs</th>\
+                        <td>' + (feature.properties['za_obs'] !== null ? autolinker.link(feature.properties['za_obs'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">g_docreg</th>\
+                        <td>' + (feature.properties['g_docreg'] !== null ? autolinker.link(feature.properties['g_docreg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">g_fecreg</th>\
+                        <td>' + (feature.properties['g_fecreg'] !== null ? autolinker.link(feature.properties['g_fecreg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_Zonadeamortiguamiento_3_0() {
+            return {
+                pane: 'pane_Zonadeamortiguamiento_3',
+                opacity: 1,
+                color: 'rgba(104,104,104,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,204,204,0.6)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_Zonadeamortiguamiento_3');
+        map.getPane('pane_Zonadeamortiguamiento_3').style.zIndex = 403;
+        map.getPane('pane_Zonadeamortiguamiento_3').style['mix-blend-mode'] = 'normal';
+        var layer_Zonadeamortiguamiento_3 = new L.geoJson(json_Zonadeamortiguamiento_3, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_Zonadeamortiguamiento_3',
+            layerName: 'layer_Zonadeamortiguamiento_3',
+            pane: 'pane_Zonadeamortiguamiento_3',
+            onEachFeature: pop_Zonadeamortiguamiento_3,
+            style: style_Zonadeamortiguamiento_3_0,
+        });
+        bounds_group.addLayer(layer_Zonadeamortiguamiento_3);
+        map.addLayer(layer_Zonadeamortiguamiento_3);
+        function pop_AreadeConservacionPrivada_4(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">acp_codi</th>\
+                        <td>' + (feature.properties['acp_codi'] !== null ? autolinker.link(feature.properties['acp_codi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_nomb</th>\
+                        <td>' + (feature.properties['acp_nomb'] !== null ? autolinker.link(feature.properties['acp_nomb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_ubpo</th>\
+                        <td>' + (feature.properties['acp_ubpo'] !== null ? autolinker.link(feature.properties['acp_ubpo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_suleg</th>\
+                        <td>' + (feature.properties['anp_suleg'] !== null ? autolinker.link(feature.properties['anp_suleg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_balec</th>\
+                        <td>' + (feature.properties['acp_balec'] !== null ? autolinker.link(feature.properties['acp_balec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_felem</th>\
+                        <td>' + (feature.properties['acp_felem'] !== null ? autolinker.link(feature.properties['acp_felem'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_gida</th>\
+                        <td>' + (feature.properties['anp_gida'] !== null ? autolinker.link(feature.properties['anp_gida'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">objectid</th>\
+                        <td>' + (feature.properties['objectid'] !== null ? autolinker.link(feature.properties['objectid'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_orden</th>\
+                        <td>' + (feature.properties['acp_orden'] !== null ? autolinker.link(feature.properties['acp_orden'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_peleg</th>\
+                        <td>' + (feature.properties['acp_peleg'] !== null ? autolinker.link(feature.properties['acp_peleg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_fecad</th>\
+                        <td>' + (feature.properties['acp_fecad'] !== null ? autolinker.link(feature.properties['acp_fecad'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acp_titu</th>\
+                        <td>' + (feature.properties['acp_titu'] !== null ? autolinker.link(feature.properties['acp_titu'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AreadeConservacionPrivada_4_0() {
+            return {
+                pane: 'pane_AreadeConservacionPrivada_4',
+                opacity: 1,
+                color: 'rgba(110,110,110,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(201,242,208,0.6)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AreadeConservacionPrivada_4');
+        map.getPane('pane_AreadeConservacionPrivada_4').style.zIndex = 404;
+        map.getPane('pane_AreadeConservacionPrivada_4').style['mix-blend-mode'] = 'normal';
+        var layer_AreadeConservacionPrivada_4 = new L.geoJson(json_AreadeConservacionPrivada_4, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreadeConservacionPrivada_4',
+            layerName: 'layer_AreadeConservacionPrivada_4',
+            pane: 'pane_AreadeConservacionPrivada_4',
+            onEachFeature: pop_AreadeConservacionPrivada_4,
+            style: style_AreadeConservacionPrivada_4_0,
+        });
+        bounds_group.addLayer(layer_AreadeConservacionPrivada_4);
+        map.addLayer(layer_AreadeConservacionPrivada_4);
+        function pop_AreadeConservacionRegional_5(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">acr_codi</th>\
+                        <td>' + (feature.properties['acr_codi'] !== null ? autolinker.link(feature.properties['acr_codi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acr_nomb</th>\
+                        <td>' + (feature.properties['acr_nomb'] !== null ? autolinker.link(feature.properties['acr_nomb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acr_ubpo</th>\
+                        <td>' + (feature.properties['acr_ubpo'] !== null ? autolinker.link(feature.properties['acr_ubpo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_suleg</th>\
+                        <td>' + (feature.properties['anp_suleg'] !== null ? autolinker.link(feature.properties['anp_suleg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acr_balec</th>\
+                        <td>' + (feature.properties['acr_balec'] !== null ? autolinker.link(feature.properties['acr_balec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">acr_felec</th>\
+                        <td>' + (feature.properties['acr_felec'] !== null ? autolinker.link(feature.properties['acr_felec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AreadeConservacionRegional_5_0() {
+            return {
+                pane: 'pane_AreadeConservacionRegional_5',
+                opacity: 1,
+                color: 'rgba(115,115,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(168,168,0,0.6)',
+                interactive: true,
+            }
+        }
+        map.createPane('pane_AreadeConservacionRegional_5');
+        map.getPane('pane_AreadeConservacionRegional_5').style.zIndex = 405;
+        map.getPane('pane_AreadeConservacionRegional_5').style['mix-blend-mode'] = 'normal';
+        var layer_AreadeConservacionRegional_5 = new L.geoJson(json_AreadeConservacionRegional_5, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreadeConservacionRegional_5',
+            layerName: 'layer_AreadeConservacionRegional_5',
+            pane: 'pane_AreadeConservacionRegional_5',
+            onEachFeature: pop_AreadeConservacionRegional_5,
+            style: style_AreadeConservacionRegional_5_0,
+        });
+        bounds_group.addLayer(layer_AreadeConservacionRegional_5);
+        map.addLayer(layer_AreadeConservacionRegional_5);
+        function pop_AreasNaturalesProtegidasDefinitivas_6(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Categoría</th>\
+                        <td>' + (feature.properties['anp_cate'] !== null ? autolinker.link(feature.properties['anp_cate'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_codi</th>\
+                        <td>' + (feature.properties['anp_codi'] !== null ? autolinker.link(feature.properties['anp_codi'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_nomb</th>\
+                        <td>' + (feature.properties['anp_nomb'] !== null ? autolinker.link(feature.properties['anp_nomb'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_sect</th>\
+                        <td>' + (feature.properties['anp_sect'] !== null ? autolinker.link(feature.properties['anp_sect'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_ubpo</th>\
+                        <td>' + (feature.properties['anp_ubpo'] !== null ? autolinker.link(feature.properties['anp_ubpo'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_suleg</th>\
+                        <td>' + (feature.properties['anp_suleg'] !== null ? autolinker.link(feature.properties['anp_suleg'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_uicn</th>\
+                        <td>' + (feature.properties['anp_uicn'] !== null ? autolinker.link(feature.properties['anp_uicn'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_balec</th>\
+                        <td>' + (feature.properties['anp_balec'] !== null ? autolinker.link(feature.properties['anp_balec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">anp_felec</th>\
+                        <td>' + (feature.properties['anp_felec'] !== null ? autolinker.link(feature.properties['anp_felec'].toLocaleString()) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent, {maxHeight: 400});
+        }
+
+        function style_AreasNaturalesProtegidasDefinitivas_6_0(feature) {
+            switch(String(feature.properties['anp_cate'])) {
+                case 'Bosques de Protección':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(56,168,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(163,255,115,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Cotos de Caza':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(115,38,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,152,0,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Parques Nacionales':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(2,76,64,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(99,176,132,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Refugio de Vida Silvestre':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(197,0,255,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,115,255,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Reservas Comunales':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(255,167,127,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 3.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,211,127,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Reservas Nacionales':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(168,168,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,255,115,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Reservas Paisajísticas':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(0,38,115,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(0,132,168,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Santuarios Históricos':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(115,0,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(117,43,0,0.6)',
+                interactive: true,
+            }
+                    break;
+                case 'Santuarios Nacionales':
+                    return {
+                pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+                opacity: 1,
+                color: 'rgba(168,0,0,0.6)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 2.0, 
+                fill: true,
+                fillOpacity: 1,
+                fillColor: 'rgba(255,167,127,0.6)',
+                interactive: true,
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_AreasNaturalesProtegidasDefinitivas_6');
+        map.getPane('pane_AreasNaturalesProtegidasDefinitivas_6').style.zIndex = 406;
+        map.getPane('pane_AreasNaturalesProtegidasDefinitivas_6').style['mix-blend-mode'] = 'normal';
+        var layer_AreasNaturalesProtegidasDefinitivas_6 = new L.geoJson(json_AreasNaturalesProtegidasDefinitivas_6, {
+            attribution: '',
+            interactive: true,
+            dataVar: 'json_AreasNaturalesProtegidasDefinitivas_6',
+            layerName: 'layer_AreasNaturalesProtegidasDefinitivas_6',
+            pane: 'pane_AreasNaturalesProtegidasDefinitivas_6',
+            onEachFeature: pop_AreasNaturalesProtegidasDefinitivas_6,
+            style: style_AreasNaturalesProtegidasDefinitivas_6_0,
+        });
+        bounds_group.addLayer(layer_AreasNaturalesProtegidasDefinitivas_6);
+        map.addLayer(layer_AreasNaturalesProtegidasDefinitivas_6);
+        var baseMaps = {};
+        L.control.layers(baseMaps,{'Areas Naturales Protegidas Definitivas<br /><table><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_BosquesdeProtección0.png" /></td><td>Bosques de Protección</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_CotosdeCaza1.png" /></td><td>Cotos de Caza</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_ParquesNacionales2.png" /></td><td>Parques Nacionales</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_RefugiodeVidaSilvestre3.png" /></td><td>Refugio de Vida Silvestre</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_ReservasComunales4.png" /></td><td>Reservas Comunales</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_ReservasNacionales5.png" /></td><td>Reservas Nacionales</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_ReservasPaisajísticas6.png" /></td><td>Reservas Paisajísticas</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_SantuariosHistóricos7.png" /></td><td>Santuarios Históricos</td></tr><tr><td style="text-align: center;"><img src="legend/AreasNaturalesProtegidasDefinitivas_6_SantuariosNacionales8.png" /></td><td>Santuarios Nacionales</td></tr></table>': layer_AreasNaturalesProtegidasDefinitivas_6,'<img src="legend/AreadeConservacionRegional_5.png" /> Area de Conservacion Regional': layer_AreadeConservacionRegional_5,'<img src="legend/AreadeConservacionPrivada_4.png" /> Area de Conservacion Privada': layer_AreadeConservacionPrivada_4,'<img src="legend/Zonadeamortiguamiento_3.png" /> Zona de amortiguamiento': layer_Zonadeamortiguamiento_3,'<img src="legend/ZonasReservadas_2.png" /> Zonas Reservadas': layer_ZonasReservadas_2,'<img src="legend/Departamentos_1.png" /> Departamentos': layer_Departamentos_1,"Google Maps": layer_GoogleMaps_0,}).addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
